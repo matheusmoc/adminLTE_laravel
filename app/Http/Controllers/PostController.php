@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdatePost;
-use App\Models\Post;  /*importar model*/
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,9 +18,9 @@ class PostController extends Controller
         return view('painel.noticias.index', ['posts' => $posts]);
     }
 
-    public function create()
+    public function novo()
     {
-        return view('admin.posts.create');
+        return view('painel.noticias.novo');
     }
 
     public function store(StoreUpdatePost $request)
@@ -30,7 +30,7 @@ class PostController extends Controller
         if ($request->image->isValid()) {  //veificação de arquivo corrompido
             $nameFile = Str::of($request->title)->slug('-') . '.' .$request->image->getClientOriginalExtension(); //customizar nome da imagem no banco
 
-            $file = $request->image->storeAs('public/posts',$nameFile);
+            $file = $request->image->storeAs('public/painel',$nameFile);
             $file = str_replace('public/','',$file);
             $data['image'] = $file; //passar data na posição image para receber variável $image
         }
@@ -38,7 +38,7 @@ class PostController extends Controller
         Post::create( $data /*criar post do db e mostrar na index*/);
 
         return redirect()/*aqui pode usar a rota direto com a url, mas optar por nome >>*/
-            ->route('posts.index')
+            ->route('painel.index')
             ->with('message', 'Publicação criada.'); //session flash funciona como popups, somente uma vez no refresh
     }
 
@@ -46,34 +46,34 @@ class PostController extends Controller
     {
         //$post = Post::where('id', $id)->first();
         //find já pega registro pelo id
-        $post = Post::find($id);
-        if (!$post) {
-            return redirect()->route('posts.index');
+        $posts = Post::find($id);
+        if (!$posts) {
+            return redirect()->route('painel.noticias.index');
         }
-        return view('admin.posts.show', ['post' => $post]);
+        return view('painel.noticias.visualizar', ['posts' => $posts]);
     }
 
 
-    public function destroy($id)
+    public function excluir($id)
     {
         $post = Post::find($id);
         if (!$post)
-            return redirect()->route('posts.index');
+            return redirect()->route('painel.index');
 
         $post->delete();
 
         return redirect()
-            ->route('posts.index')
+            ->route('painel.index')
             ->with('message', 'Publicação removida.'); //session flash funciona como popups, somente uma vez
     }
 
-    public function edit($id)
+    public function editar($id)
     {
         $post = Post::find($id);
         if (!$post) {
             return redirect()->back();   //->route('posts.index');
         }
-        return view('admin.posts.edit', ['post' => $post]);
+        return view('painel.noticias.editar', ['post' => $post]);
     }
 
     public function update(StoreUpdatePost $request, $id)
@@ -84,7 +84,7 @@ class PostController extends Controller
         }
         $post->update($request->all());
 
-        return redirect()->route('posts.index')
+        return redirect()->route('painel.index')
             ->with('message', 'Publicação editada.'); //session flash funciona como popups, somente uma vez
     }
     public function search(Request $request)
@@ -95,19 +95,19 @@ class PostController extends Controller
         $posts = Post::where('title'/*nome do elemento*/, 'LIKE'/*'='*//*correspondência de name*/, "%{$request->search}%" /*inicio ou final do name*/)
             ->orWhere('content'/*nome do elemento*/, 'LIKE'/*correspondência de name*/, "%{$request->search}%" /*inicio ou final do name*/)
             ->paginate();
-        return view('.welcome', ['posts' => $posts, 'filters' => $filters ]);
+        return view('painel.noticias.visualizar', ['posts' => $posts, 'filters' => $filters ]);
     }
 
-    public function welcome()
+    public function painel()
     {
-        $posts /*variavel aux*/ = Post::orderBy('id', 'DESC'/*decrescente*/)->paginate(); //paginação ordenada com id
+       $posts /*variavel aux*/ = Post::orderBy('id', 'DESC'/*decrescente*/)->paginate(); //paginação ordenada com id
 
 
-        return view('.welcome', ['posts' => $posts]);
+        return view('painel.painel', ['posts' => $posts]);
     }
 
     // public function datas(Request $request){
     //     $posts = new Post;
     //     $posts->date = $request->date;
-    // }
+    //
 }

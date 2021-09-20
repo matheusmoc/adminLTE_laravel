@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Painel')
 
 @section('content_header')
-    <h1>Publicações</h1>
+    <h1>Bem vindo</h1>
 @stop
 
 @section('content')
-    @foreach ($posts as $post)
+    {{-- @foreach ($posts as $post)
         @section('title', 'Notícias')
     @endforeach
 
@@ -17,7 +17,7 @@
             <p>
                 {{ $post->title }}
                 [
-                <button><a href="{{ route('posts.show', $post->id) }}">Veja mais</a></button>
+                <button><a href="{{ route('painel.show', $post->id) }}">Veja mais</a></button>
                 ]
             </p>
         @endforeach
@@ -34,5 +34,5 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@stop --}}
 

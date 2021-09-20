@@ -129,7 +129,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-dark navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -188,8 +188,8 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
-    'logout_url' => 'logout',
+    'dashboard_url' => 'painel',
+    'logout_url' =>'logout',
     'login_url' => 'login',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
@@ -249,60 +249,52 @@ return [
         [
             'text'        => 'Notícias',
             'url'         => '/painel/noticias',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'far fa-newspaper',
             //'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Programação',
             'url'         => '/painel/programacao',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-tv',
             //'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Podcasts',
             'url'         => '/painel/podcasts',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-podcast',
             //'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Palestras',
             'url'         => '/painel/palestras',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-address',
             //'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Live empresarial',
             'url'         => '/painel/live-empresarial',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-video',
             //'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Conecta conhecimento',
             'url'         => '/painel/conecta-conhecimento',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-network-wired',
             //'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Usuários',
             'url'         => '/painel/usuarios',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'far fa-user',
             //'label'       => 4,
             'label_color' => 'success',
         ],
-        [
-            'text'        => 'Criar publicação',
-            'url'         => '/noticias/painel',
-            'icon'        => 'far fa-fw fa-file',
-            //'label'       => 4,
-            'label_color' => 'success',
-        ],
-
 
         ['header' => 'account_settings'],
         // [
@@ -312,7 +304,7 @@ return [
         // ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => 'password/reset',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [

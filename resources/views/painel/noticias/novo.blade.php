@@ -8,14 +8,12 @@
 
 @section('content_header')
 
-
-    <div class="container mb-4">
-        <h2>Noticias</h2>
-    </div>
+        <h2>Notícias</h2>
 
 @section('content')
-    <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
-        @include('admin.posts.reuse.form')
+    <form action="{{ route('painel.store') }}" method="post" enctype="multipart/form-data">
+        @include('painel.noticias.reutilizaveis.form')
     </form>
-    @endsection
+@endsection
+
 @stop

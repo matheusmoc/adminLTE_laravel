@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{PostController};
+use App\Http\Controllers\{PostController, UsuarioController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -22,25 +22,32 @@ use Illuminate\Support\Facades\Auth;
 
 Route::/*aceita todas as requisições*/any('posts/search', [PostController::class, 'search'])->name('posts.search')->middleware(['auth']);
 
-Route::get('/', [PostController::class, 'welcome'])->name('.welcome')->middleware(['auth']); //rota dubplicada para /noticia
+Route::get('/painel', [PostController::class, 'painel'])->name('painel.painel')->middleware(['auth']); //rota dubplicada para /noticia
 
-Route::get('/painel/noticias', [PostController::class, 'index'])->name('posts.index')->middleware(['auth']);
+Route::get('/painel/noticias', [PostController::class, 'index'])->name('painel.index')->middleware(['auth']);
 
-Route::post('/painel', [PostController::class, 'store'])->name('posts.store')->middleware(['auth']); //responsável pelo request/ cadastrar do user ao db
+Route::post('/store', [PostController::class, 'store'])->name('painel.store')->middleware(['auth']); //responsável pelo request/ cadastrar do user ao db
 
-Route::get('/painel/noticias/novo', [PostController::class, 'create'])->name('posts.create')->middleware(['auth']); //colocar create antes das rotas com id
+Route::get('/painel/noticias/novo', [PostController::class, 'novo'])->name('painel.novo')->middleware(['auth']); //colocar create antes das rotas com id
 
-Route::put('/painel/noticias/{id}', [PostController::class, 'update'])->name('posts.update')->middleware(['auth']);
+Route::put('/painel/noticias/{id}', [PostController::class, 'update'])->name('painel.update')->middleware(['auth']);
 
-Route::get('/painel/noticias/editar/{id}', [PostController::class, 'edit'])->name('posts.edit')->middleware(['auth']);
+Route::get('/painel/noticias/editar/{id}', [PostController::class, 'editar'])->name('painel.editar')->middleware(['auth']);
 
-Route::delete('/painel/noticias/{id}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware(['auth']);
+Route::delete('/painel/noticias/{id}', [PostController::class, 'excluir'])->name('painel.excluir')->middleware(['auth']);
 
-Route::get('/painel/noticias/visualizar/{id}', [PostController::class, 'show'])->name('posts.show')->middleware(['auth']);
+Route::get('/painel/noticias/visualizar/{id}', [PostController::class, 'show'])->name('painel.show')->middleware(['auth']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-//-----------------------------------programação---------------------//
 
+
+//---------------------------------------usuarios--------------------------//
+
+Route::get('painel/usuarios', [UsuarioController::class, 'usuarios'])->name('painel.usuarios');
+
+
+
+//---------------------------------------programacao--------------------------//

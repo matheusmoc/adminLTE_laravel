@@ -20,7 +20,7 @@
     @endif
     <div class='container' id='container_css'>
         <!--direcionar para create-->
-        <a class="btn btn-primary mb-2" href="{{ route('posts.create') }}">Criar publicação</a>
+        <a class="btn btn-primary mb-2" href="{{ route('painel.novo') }}">Criar publicação</a>
     </div>
     <hr>
     <div class="row">
@@ -60,10 +60,10 @@
                                                 <td>
                                                     <div class='row'>
                                                         <a class='btn btn-primary ml-1'
-                                                            href="{{ route('posts.show', $post->id) }}">Visualizar</a>
+                                                            href="{{ route('painel.show', $post->id) }}">Visualizar</a>
                                                         <a class='btn btn-primary ml-1'
-                                                            href="{{ route('posts.edit', $post->id) }}">Editar</a>
-                                                        @include('admin.posts.reuse.destroy-post')
+                                                            href="{{ route('painel.editar', $post->id) }}">Editar</a>
+                                                        @include('painel.noticias.reutilizaveis.excluir')
                                                     </div>
                                                 </td>
                                             </tr>
@@ -75,6 +75,14 @@
                                     <p>
                                     <h2>Sem notícias publicadas</h2>
                                     </p>
+                                @endif
+
+                                <!--FILTRO DE PESQUISA-->
+                                @if (isset($filters))
+                                    {{ $posts->appends($filters)->links() }}
+                                    <!--appends com redicção any, para preservar o filtro de search na url para não bugar-->
+                                @else
+                                    {{ $posts->links() }}
                                 @endif
                             </div>
                         </div>
